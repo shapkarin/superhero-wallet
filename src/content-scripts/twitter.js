@@ -1,8 +1,7 @@
 /* eslint-disable no-continue */
-import createSuperheroTipAction from './tipButton';
+import createSuperheroTipAction, { isInContent } from './tipButton';
 
 let timeout = null;
-const isInContent = !window.location.href.includes(browser.extension.getURL('./'));
 
 const getTweetId = tweet => {
   const status = tweet.querySelector("a[href*='/status/']");

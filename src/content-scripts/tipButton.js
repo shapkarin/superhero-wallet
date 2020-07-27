@@ -4,6 +4,8 @@ import icon from '../icons/twitter-icon-tip.svg';
 
 global.browser = require('webextension-polyfill');
 
+export const isInContent = !window.location.href.includes(browser.extension.getURL('./'));
+
 const buttonContentStyleCommon = `font-size: 12px;
 font-weight: bold;
 margin-left: 6px;

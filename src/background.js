@@ -147,6 +147,10 @@ if (process.env.IS_EXTENSION && require.main.i === module.id && inBackground) {
   browser.contextMenus.onClicked.addListener(({ menuItemId, pageUrl }) => {
     if (menuItemId === 'superheroTip') openTipPopup(pageUrl);
   });
+
+  browser.webNavigation.onHistoryStateUpdated.addListener(() => {
+    browser.tabs.executeScript(null, { file: 'other/youtube.js' });
+  });
 }
 
 // eslint-disable-next-line import/prefer-default-export
