@@ -37,13 +37,16 @@
         <BoxButton text="Activity" to="/transactions" class="tour__step5">
           <Activity slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step6">
+        <BoxButton :text="$t('pages.appVUE.invite')" to="/invite">
+          <Ivite slot="icon" />
+        </BoxButton>
+        <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step7">
           <Topup slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.withdraw')" to="/send" class="tour__step7">
+        <BoxButton :text="$t('pages.appVUE.withdraw')" to="/send" class="tour__step8">
           <Withdraw slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.settings')" to="/settings" class="tour__step8">
+        <BoxButton :text="$t('pages.appVUE.settings')" to="/settings" class="tour__step9">
           <Settings slot="icon" />
         </BoxButton>
       </div>
@@ -58,6 +61,7 @@ import Tip from '../../../icons/tip-icon.svg?vue-component';
 import Claim from '../../../icons/claim-icon.svg?vue-component';
 import Activity from '../../../icons/activity-icon.svg?vue-component';
 import Topup from '../../../icons/topup-icon.svg?vue-component';
+import Ivite from '../../../icons/invite.svg?vue-component';
 import Withdraw from '../../../icons/withdraw-icon.svg?vue-component';
 import Settings from '../../../icons/settings-icon.svg?vue-component';
 import RecentTransactions from '../components/RecentTransactions';
@@ -78,6 +82,7 @@ export default {
     BalanceInfo,
     AccountInfo,
     BoxButton,
+    Ivite,
   },
   computed: {
     ...mapState(['tourRunning', 'backedUpSeed']),
