@@ -1,11 +1,15 @@
 <template>
   <div class="invite-row">
     <div class="invite-info">
-      <span class="primary">{{ balance }} {{ $t('pages.appVUE.aeid') }}</span>
+      <span class="primary">
+        <span class="balance">{{ balance }}</span>
+      </span>
       <!--eslint-disable-line vue-i18n/no-raw-text-->
-      ({{ (balance * current.currencyRate).toFixed(2) }}
+      (
+        {{ currencySigns[current.currency] }}
+        {{ (balance * current.currencyRate).toFixed(2) }}
+      )
       <!--eslint-disable-next-line vue-i18n/no-raw-text-->
-      {{ current.currency.toUpperCase() }})
       <span class="date">{{ createdAt | formatDate }}</span>
     </div>
     <div class="invite-link">
@@ -13,13 +17,17 @@
       <button class="invite-link-copy" v-clipboard:copy="link"><CopyIcon /></button>
     </div>
     <template v-if="!topUp">
-      <Button half dark @click="topUp = true">{{ $t('pages.invite.top-up') }}</Button>
-      <Button half @click="claim">{{ $t('pages.invite.claim') }}</Button>
+      <div class="center">
+        <Button bold minwidth inline dark @click="topUp = true">{{  $t('pages.invite.top-up') }}</Button>
+        <Button bold minwidth inline @click="claim">{{  $t('pages.invite.claim')  }}</Button>
+      </div>
     </template>
     <template v-else>
       <AmountSend v-model="topUpAmount" />
-      <Button half dark @click="topUp = false">{{ $t('pages.invite.close') }}</Button>
-      <Button half @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
+      <div class="center">
+        <Button bold minwidth inline dark @click="topUp = false">{{ $t('pages.invite.close')  }}</Button>
+        <Button bold minwidth inline @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
+      </div>
     </template>
   </div>
 </template>
@@ -31,6 +39,7 @@ import AmountSend from './AmountSend';
 import Button from './Button';
 import CopyIcon from '../../../icons/copy.svg?vue-component';
 import { formatDate } from '../../utils';
+import { currencySigns } from '../../utils/helper';
 
 export default {
   props: {
@@ -39,7 +48,7 @@ export default {
   },
   components: { Button, AmountSend, CopyIcon },
   filters: { formatDate },
-  data: () => ({ topUp: false, topUpAmount: 0, balance: 0 }),
+  data: () => ({ topUp: false, topUpAmount: 0, balance: 0, currencySigns,}),
   computed: {
     ...mapState(['sdk', 'current']),
     link() {
@@ -113,46 +122,58 @@ export default {
 .invite-row {
   padding: 1rem;
   width: 100%;
-  border-bottom: 1px solid #12121b;
+  border-bottom: 1px solid $tour-bg-color;
   text-align: left;
-  color: #bcbcc4;
-  background: #21222a;
+  color: $text-color;
   position: relative;
+  border-bottom: 2px solid $black-1;
 
   .invite-link {
     margin-bottom: 5px;
-    font-size: 12px;
-    color: $text-color;
+    font-size: 11px;
 
     span {
-      width: 260px;
+      width: calc(100% - 23px);
       display: inline-block;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      color: $white-1;
     }
   }
 
   .invite-link-copy {
     padding: 0;
+    color: $gray-2;
   }
 
   .invite-info {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 400;
     color: $white-color;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    color: $gray-2;
 
     .primary {
       color: $secondary-color;
       margin-right: 5px;
+      font-weight: 400;
+    }
+
+    .balance {
+      font-family: Roboto;
+      color: $white-1;
+      font-weight: 400;
+
+      &::after {
+        color: $secondary-color;
+      }
     }
 
     .date {
-      font-size: 12px;
-      font-weight: normal;
+      font-size: 11px;
       margin-left: auto;
       color: $text-color;
     }

@@ -85,6 +85,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: $white-1;
+
+    .title {
+      font-size: 18px;
+      font-weight: 300;
+    }
 
     &:not(.isLoggedIn) .title {
       margin-left: auto;

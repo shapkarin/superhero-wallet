@@ -3,12 +3,17 @@ import { TxBuilder } from '@aeternity/aepp-sdk/es';
 import { testAccount, txParams } from './config';
 
 export const formatDate = time =>
-  new Date(+time).toLocaleString(navigator.language, {
-    timeStyle: 'short',
-    dateStyle: 'short',
-    hourCycle: 'h23',
-  });
-
+  new Date(+time)
+    .toLocaleString(navigator.language, {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h11',
+    })
+    .replace(/\//g, '.');
+// MM/DD/YY
 export const mockLogin = async (options = {}) => {
   await browser.storage.local.clear();
   const { mnemonic, publicKey } = testAccount;
