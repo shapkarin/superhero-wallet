@@ -8,7 +8,11 @@ export default {
   },
   mutations: {
     add: ({ invites }, secretKey) => invites.unshift({ secretKey, createdAt: Date.now() }),
-    remove: ( state, secretKey) => state.invites = state.invites.filter( invite => invite.secretKey !== secretKey)
+    remove: ({ invites }, secretKey) =>
+      invites.splice(
+        invites.findIndex(invite => invite.secretKey === secretKey),
+        1,
+      )[0],
   },
   actions: {
     async claim({ rootState: { account, current, sdk } }, secretKey) {
