@@ -18,14 +18,15 @@
     </div>
     <template v-if="!topUp">
       <div class="center">
-        <Button bold minwidth inline dark @click="topUp = true">{{  $t('pages.invite.top-up') }}</Button>
-        <Button bold minwidth inline @click="claim">{{  $t('pages.invite.claim')  }}</Button>
+        <Button v-if="balance > 0" bold minwidth inline @click="claim">{{  $t('pages.invite.claim')  }}</Button>
+        <Button v-else bold minwidth inline dark @click="removeItem">{{  $t('pages.invite.delete')  }}</Button>
+        <Button bold minwidth inline @click="topUp = true">{{  $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
     <template v-else>
-      <AmountSend v-model="topUpAmount" />
+      <AmountSend class="send-amount" v-model="topUpAmount" :label="$t('pages.invite.top-up-with')"/>
       <div class="center">
-        <Button bold minwidth inline dark @click="topUp = false">{{ $t('pages.invite.close')  }}</Button>
+        <Button bold minwidth inline dark @click="topUp = false">{{ $t('pages.invite.collapse')  }}</Button>
         <Button bold minwidth inline @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
@@ -51,6 +52,7 @@ export default {
   data: () => ({ topUp: false, topUpAmount: 0, balance: 0, currencySigns,}),
   computed: {
     ...mapState(['sdk', 'current']),
+    ...mapState('invites', ['invites']),
     link() {
       const secretKey = Crypto.encodeBase58Check(Buffer.from(this.secretKey, 'hex'));
       return new URL(
@@ -73,6 +75,9 @@ export default {
     },
   },
   methods: {
+    removeItem() {
+      this.$store.commit('invites/remove', this.secretKey);
+    },
     async updateBalance() {
       await this.$watchUntilTruly(() => this.sdk);
       this.balance = parseFloat(
@@ -177,6 +182,10 @@ export default {
       margin-left: auto;
       color: $text-color;
     }
+  }
+
+  .send-amount {
+    margin: 0;
   }
 }
 </style>

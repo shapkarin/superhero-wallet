@@ -958,9 +958,12 @@
       "generate": "Generate Link",
       "created-links": "Generated invite links",
       "top-up": "Top up",
-      "close": "Close",
-      "claim": "Claim back",
-      "insufficient-balance": "Insufficient balance"
+      "collapse": "Collapse",
+      "claim": "Claim Back",
+      "insufficient-balance": "Insufficient balance",
+      "tip-attached": "Tip attached",
+      "top-up-with": "Top up with",
+      "delete": "Delete"
     }
   },
   "phishing": {

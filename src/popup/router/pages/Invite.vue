@@ -4,7 +4,7 @@
       <Invite class="invite-icon"/>
       {{ $t('pages.invite.generate-link') }}
     </p>
-    <AmountSend v-model="amount" />
+    <AmountSend v-model="amount" class="send-amount" :label="$t('pages.invite.tip-attached')"/>
     <div class="generate-action">
       <Button bold @click="generate" extend>{{ $t('pages.invite.generate') }}</Button>
     </div>
@@ -99,5 +99,9 @@ export default {
     padding: 15px 20px;
     border-bottom: 2px solid $black-1;
   }
+}
+
+.send-amount {
+  margin: 10px 0 0 0;
 }
 </style>

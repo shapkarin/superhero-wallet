@@ -7,7 +7,7 @@
         :error="amountError || value < 0"
         :value="value"
         :placeholder="$t('pages.tipPage.amountPlaceholder')"
-        :label="$t('pages.tipPage.amountLabel')"
+        :label="label ? label : $t('pages.tipPage.amountLabel')"
         @input="$emit('input', $event)"
       />
       <div class="ml-15 text-left" style="margin-right: auto;">
@@ -15,7 +15,7 @@
         <span class="secondary-text f-14 block l-1" data-cy="amount">
           {{ $t('pages.appVUE.aeid') }}
         </span>
-        <span class="f-14 block l-1" data-cy="amount-currency">
+        <span class="f-14 block l-1 amount-currency" data-cy="amount-currency">
           {{ currencyAmount }} {{ currentCurrency }}
         </span>
       </div>
@@ -24,7 +24,7 @@
         <span class="secondary-text f-14 block l-1" data-cy="balance">
           {{ tokenBalance }} {{ $t('pages.appVUE.aeid') }}
         </span>
-        <span class="f-14 block l-1" data-cy="balance-currency">
+        <span class="f-14 block l-1 balance-currency" data-cy="balance-currency">
           {{ balanceCurrency }} {{ currentCurrency }}
         </span>
       </div>
@@ -41,7 +41,7 @@ export default {
   components: {
     Input,
   },
-  props: ['amountError', 'value', 'errorMsg'],
+  props: ['amountError', 'value', 'errorMsg', 'label'],
   computed: {
     ...mapGetters(['tokenBalance', 'balanceCurrency', 'currentCurrency']),
     currencyAmount() {
@@ -75,6 +75,10 @@ export default {
     word-break: break-word;
     margin-top: 10px;
     text-align: left;
+  }
+
+  .balance-currency, .amount-currency {
+    color: $text-color;
   }
 }
 </style>
