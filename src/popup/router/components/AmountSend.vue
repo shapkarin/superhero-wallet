@@ -16,7 +16,7 @@
           {{ $t('pages.appVUE.aeid') }}
         </span>
         <span class="f-14 block l-1 amount-currency" data-cy="amount-currency">
-          {{ currencyAmount }} {{ currentCurrency }}
+          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ currencyAmount }} 
         </span>
       </div>
       <div class="balance-box">
@@ -25,7 +25,7 @@
           {{ tokenBalance }} {{ $t('pages.appVUE.aeid') }}
         </span>
         <span class="f-14 block l-1 balance-currency" data-cy="balance-currency">
-          {{ balanceCurrency }} {{ currentCurrency }}
+          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ balanceCurrency }} 
         </span>
       </div>
     </div>
@@ -36,11 +36,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import Input from './Input';
+import { currencySigns } from '../../utils/helper';
 
 export default {
   components: {
     Input,
   },
+  data: () => ({currencySigns}),
   props: ['amountError', 'value', 'errorMsg', 'label'],
   computed: {
     ...mapGetters(['tokenBalance', 'balanceCurrency', 'currentCurrency']),
