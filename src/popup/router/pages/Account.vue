@@ -40,13 +40,13 @@
         <BoxButton :text="$t('pages.appVUE.invite')" to="/invite">
           <Ivite slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step7">
+        <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step6">
           <Topup slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.withdraw')" to="/send" class="tour__step8">
+        <BoxButton :text="$t('pages.appVUE.withdraw')" to="/send" class="tour__step7">
           <Withdraw slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.settings')" to="/settings" class="tour__step9">
+        <BoxButton :text="$t('pages.appVUE.settings')" to="/settings" class="tour__step8">
           <Settings slot="icon" />
         </BoxButton>
       </div>
