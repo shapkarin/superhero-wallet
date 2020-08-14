@@ -5,7 +5,7 @@
         <span class="balance">{{ balance }}</span>
       </span>
       <!--eslint-disable-line vue-i18n/no-raw-text-->
-      ({{ currencySigns[current.currency] }}
+      ({{ currencySigns[current.currency.toUpperCase()] }}
       <!--eslint-disable-next-line vue-i18n/no-raw-text-->
       {{ (balance * current.currencyRate).toFixed(2) }})
       <span class="date">{{ createdAt | formatDate }}</span>
@@ -16,13 +16,13 @@
     </div>
     <template v-if="!topUp">
       <div class="center">
-        <Button v-if="balance > 0" bold minwidth inline @click="claim">{{
+        <Button v-if="balance > 0" class="minwidth" bold inline @click="claim">{{
           $t('pages.invite.claim')
         }}</Button>
-        <Button v-else bold minwidth inline dark @click="removeItem">{{
+        <Button v-else class="minwidth" bold inline dark @click="deleteItem">{{
           $t('pages.invite.delete')
         }}</Button>
-        <Button bold minwidth inline @click="topUp = true">{{ $t('pages.invite.top-up') }}</Button>
+        <Button class="minwidth" bold inline @click="topUp = true">{{ $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
     <template v-else>
@@ -32,10 +32,10 @@
         :label="$t('pages.invite.top-up-with')"
       />
       <div class="center">
-        <Button bold minwidth inline dark @click="topUp = false">{{
+        <Button class="minwidth" bold inline dark @click="topUp = false">{{
           $t('pages.invite.collapse')
         }}</Button>
-        <Button bold minwidth inline @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
+        <Button class="minwidth" bold inline @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
   </div>
@@ -59,8 +59,7 @@ export default {
   filters: { formatDate },
   data: () => ({ topUp: false, topUpAmount: 0, balance: 0, currencySigns }),
   computed: {
-    ...mapState(['sdk', 'current']),
-    ...mapState('invites', ['invites']),
+    ...mapState(['sdk', 'current', 'invites']),
     link() {
       const secretKey = Crypto.encodeBase58Check(Buffer.from(this.secretKey, 'hex'));
       return new URL(
@@ -83,8 +82,8 @@ export default {
     },
   },
   methods: {
-    removeItem() {
-      this.$store.commit('invites/remove', this.secretKey);
+    deleteItem() {
+      this.$store.commit('invites/delete', this.secretKey);
     },
     async updateBalance() {
       await this.$watchUntilTruly(() => this.sdk);
@@ -162,7 +161,6 @@ export default {
 
   .invite-info {
     font-size: 13px;
-    font-weight: 400;
     color: $white-color;
     display: flex;
     align-items: center;
@@ -194,6 +192,10 @@ export default {
 
   .send-amount {
     margin: 0;
+  }
+
+  .minwidth {
+    width: 120px !important;
   }
 }
 </style>

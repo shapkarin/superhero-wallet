@@ -321,7 +321,7 @@ export const getTwitterAccountUrl = url => {
 };
 
 export const currencySigns = {
-  eur: '€',
-  usd: '$',
-  cny: '¥',
+  EUR: '€',
+  USD: '$',
+  CNY: '¥',
 };

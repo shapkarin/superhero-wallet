@@ -89,13 +89,11 @@ export default {
 
     .title {
       font-size: 18px;
-      font-weight: 300;
     }
 
     &:not(.isLoggedIn) .title {
       margin-left: auto;
       margin-right: auto;
-      font-weight: 500;
     }
 
     .back-arrow {
@@ -115,7 +113,6 @@ export default {
         left: 0;
         right: 0;
         text-align: center;
-        font-weight: 500;
       }
 
       .start-onboarding {

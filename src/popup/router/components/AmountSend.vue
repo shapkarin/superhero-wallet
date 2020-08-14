@@ -16,7 +16,7 @@
           {{ $t('pages.appVUE.aeid') }}
         </span>
         <span class="f-14 block l-1 amount-currency" data-cy="amount-currency">
-          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ currencyAmount }}
+          {{ currencySign }}{{ currencyAmount }}
         </span>
       </div>
       <div class="balance-box">
@@ -24,8 +24,8 @@
         <span class="secondary-text f-14 block l-1" data-cy="balance">
           {{ tokenBalance }} {{ $t('pages.appVUE.aeid') }}
         </span>
-        <span class="f-14 block l-1 balance-currency" data-cy="balance-currency">
-          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ balanceCurrency }}
+        <span class="f-14 block l-1 amount-currency" data-cy="balance-currency">
+          {{ currencySign }}{{ balanceCurrency }}
         </span>
       </div>
     </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import Input from './Input';
 import { currencySigns } from '../../utils/helper';
 
@@ -45,7 +45,10 @@ export default {
   data: () => ({ currencySigns }),
   props: ['amountError', 'value', 'errorMsg', 'label'],
   computed: {
-    ...mapGetters(['tokenBalance', 'balanceCurrency', 'currentCurrency']),
+    ...mapGetters(['tokenBalance', 'balanceCurrency']),
+    ...mapState({
+      currencySign: (state, { currentCurrency }) => currencySigns[currentCurrency],
+    }),
     currencyAmount() {
       return ((this.value || 0) * this.$store.state.current.currencyRate).toFixed(2);
     },
@@ -68,6 +71,10 @@ export default {
     input.input {
       margin-bottom: 0;
     }
+
+    .amount-currency {
+      color: $text-color;
+    }
   }
 
   .error-msg {
@@ -77,11 +84,6 @@ export default {
     word-break: break-word;
     margin-top: 10px;
     text-align: left;
-  }
-
-  .balance-currency,
-  .amount-currency {
-    color: $text-color;
   }
 }
 </style>
