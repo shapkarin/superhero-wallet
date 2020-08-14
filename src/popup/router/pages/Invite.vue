@@ -1,16 +1,16 @@
 <template>
   <div class="popup">
     <p class="section-title">
-      <Invite class="invite-icon"/>
+      <Invite class="invite-icon" />
       {{ $t('pages.invite.generate-link') }}
     </p>
-    <AmountSend v-model="amount" class="send-amount" :label="$t('pages.invite.tip-attached')"/>
+    <AmountSend v-model="amount" class="send-amount" :label="$t('pages.invite.tip-attached')" />
     <div class="generate-action">
       <Button bold @click="generate" extend>{{ $t('pages.invite.generate') }}</Button>
     </div>
     <div class="generated-links">
       <p class="section-title">
-        <Invite class="invite-icon"/>
+        <Invite class="invite-icon" />
         {{ $t('pages.invite.created-links') }}
       </p>
       <InviteItem
@@ -33,7 +33,7 @@ import InviteItem from '../components/InviteItem';
 import Invite from '../../../icons/invite.svg?vue-component';
 
 export default {
-  components: { AmountSend, InviteItem, Invite, },
+  components: { AmountSend, InviteItem, Invite },
   data: () => ({ amount: 0, loading: false }),
   computed: {
     ...mapState(['sdk']),

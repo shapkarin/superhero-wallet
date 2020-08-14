@@ -153,7 +153,7 @@ export default {
   }
 
   &.bold {
-    font-weight: 500!important;
+    font-weight: 500 !important;
   }
 
   &.inactive {

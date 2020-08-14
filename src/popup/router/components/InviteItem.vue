@@ -5,11 +5,9 @@
         <span class="balance">{{ balance }}</span>
       </span>
       <!--eslint-disable-line vue-i18n/no-raw-text-->
-      (
-        {{ currencySigns[current.currency] }}
-        {{ (balance * current.currencyRate).toFixed(2) }}
-      )
+      ({{ currencySigns[current.currency] }}
       <!--eslint-disable-next-line vue-i18n/no-raw-text-->
+      {{ (balance * current.currencyRate).toFixed(2) }})
       <span class="date">{{ createdAt | formatDate }}</span>
     </div>
     <div class="invite-link">
@@ -18,15 +16,25 @@
     </div>
     <template v-if="!topUp">
       <div class="center">
-        <Button v-if="balance > 0" bold minwidth inline @click="claim">{{  $t('pages.invite.claim')  }}</Button>
-        <Button v-else bold minwidth inline dark @click="removeItem">{{  $t('pages.invite.delete')  }}</Button>
-        <Button bold minwidth inline @click="topUp = true">{{  $t('pages.invite.top-up') }}</Button>
+        <Button v-if="balance > 0" bold minwidth inline @click="claim">{{
+          $t('pages.invite.claim')
+        }}</Button>
+        <Button v-else bold minwidth inline dark @click="removeItem">{{
+          $t('pages.invite.delete')
+        }}</Button>
+        <Button bold minwidth inline @click="topUp = true">{{ $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
     <template v-else>
-      <AmountSend class="send-amount" v-model="topUpAmount" :label="$t('pages.invite.top-up-with')"/>
+      <AmountSend
+        class="send-amount"
+        v-model="topUpAmount"
+        :label="$t('pages.invite.top-up-with')"
+      />
       <div class="center">
-        <Button bold minwidth inline dark @click="topUp = false">{{ $t('pages.invite.collapse')  }}</Button>
+        <Button bold minwidth inline dark @click="topUp = false">{{
+          $t('pages.invite.collapse')
+        }}</Button>
         <Button bold minwidth inline @click="sendTopUp">{{ $t('pages.invite.top-up') }}</Button>
       </div>
     </template>
@@ -49,7 +57,7 @@ export default {
   },
   components: { Button, AmountSend, CopyIcon },
   filters: { formatDate },
-  data: () => ({ topUp: false, topUpAmount: 0, balance: 0, currencySigns,}),
+  data: () => ({ topUp: false, topUpAmount: 0, balance: 0, currencySigns }),
   computed: {
     ...mapState(['sdk', 'current']),
     ...mapState('invites', ['invites']),

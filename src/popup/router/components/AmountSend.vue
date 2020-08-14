@@ -16,7 +16,7 @@
           {{ $t('pages.appVUE.aeid') }}
         </span>
         <span class="f-14 block l-1 amount-currency" data-cy="amount-currency">
-          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ currencyAmount }} 
+          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ currencyAmount }}
         </span>
       </div>
       <div class="balance-box">
@@ -25,7 +25,7 @@
           {{ tokenBalance }} {{ $t('pages.appVUE.aeid') }}
         </span>
         <span class="f-14 block l-1 balance-currency" data-cy="balance-currency">
-          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ balanceCurrency }} 
+          {{ currencySigns[currentCurrency.toLowerCase()] }}{{ balanceCurrency }}
         </span>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
   components: {
     Input,
   },
-  data: () => ({currencySigns}),
+  data: () => ({ currencySigns }),
   props: ['amountError', 'value', 'errorMsg', 'label'],
   computed: {
     ...mapGetters(['tokenBalance', 'balanceCurrency', 'currentCurrency']),
@@ -79,7 +79,8 @@ export default {
     text-align: left;
   }
 
-  .balance-currency, .amount-currency {
+  .balance-currency,
+  .amount-currency {
     color: $text-color;
   }
 }
