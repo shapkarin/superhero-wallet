@@ -37,7 +37,7 @@
         <BoxButton text="Activity" to="/transactions" class="tour__step5">
           <Activity slot="icon" />
         </BoxButton>
-        <BoxButton :text="$t('pages.appVUE.invite')" to="/invite">
+        <BoxButton :text="$t('pages.appVUE.invite')" :to="{ name: 'invite' }">
           <Invite slot="icon" />
         </BoxButton>
         <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step6">
