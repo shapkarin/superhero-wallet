@@ -7,7 +7,7 @@
         :error="amountError || value < 0"
         :value="value"
         :placeholder="$t('pages.tipPage.amountPlaceholder')"
-        :label="label ? label : $t('pages.tipPage.amountLabel')"
+        :label="label || $t('pages.tipPage.amountLabel')"
         @input="$emit('input', $event)"
       />
       <div class="ml-15 text-left" style="margin-right: auto;">
