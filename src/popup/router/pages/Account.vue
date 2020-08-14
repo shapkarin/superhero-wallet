@@ -38,7 +38,7 @@
           <Activity slot="icon" />
         </BoxButton>
         <BoxButton :text="$t('pages.appVUE.invite')" to="/invite">
-          <Ivite slot="icon" />
+          <Invite slot="icon" />
         </BoxButton>
         <BoxButton :text="$t('pages.appVUE.topUp')" to="/receive" class="tour__step6">
           <Topup slot="icon" />
@@ -61,7 +61,7 @@ import Tip from '../../../icons/tip-icon.svg?vue-component';
 import Claim from '../../../icons/claim-icon.svg?vue-component';
 import Activity from '../../../icons/activity-icon.svg?vue-component';
 import Topup from '../../../icons/topup-icon.svg?vue-component';
-import Ivite from '../../../icons/invite.svg?vue-component';
+import Invite from '../../../icons/invite.svg?vue-component';
 import Withdraw from '../../../icons/withdraw-icon.svg?vue-component';
 import Settings from '../../../icons/settings-icon.svg?vue-component';
 import RecentTransactions from '../components/RecentTransactions';
@@ -82,7 +82,7 @@ export default {
     BalanceInfo,
     AccountInfo,
     BoxButton,
-    Ivite,
+    Invite,
   },
   computed: {
     ...mapState(['tourRunning', 'backedUpSeed']),
